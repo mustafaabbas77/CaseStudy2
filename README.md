@@ -1,4 +1,4 @@
-# MSDS6306_CaseStudy1
+# MSDS6306_CaseStudy2
 This is the Case Study 2 repository for the MSDS 6306 - 404 group of Jethin Abraham, Daniel Higdon, Mustafa Sakarwala, and Keyue Wang
 
 ## Instructions for Setup
