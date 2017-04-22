@@ -6,7 +6,7 @@ Group from MSDS 6306 - 404: Jethin Abraham, Daniel Higdon, Mustafa Sakarwala and
 
 
 
-#Introduction
+# Introduction
 The puropose of our case study is twofold. In part 1 (Question 2 of the assignment), we will utilize R's built-in data set called Orange to calculate and plot our analysis of the trees. For part 2 (Question 3 of the assignment), we will analyze and compare temperatures in the United States and all major cities in the world. 
 
 The project will take readers through the analysis step-by-step, from setup of the project to the final analysis. We will conclude with our findings of the analysis.
@@ -120,9 +120,9 @@ if (!require("lubridate")) {
 library(lubridate)
 ```
 
-#Question 2 - Orange
+# Question 2 - Orange
 
-##Step 1: Calculating the Mean and Median
+## Step 1: Calculating the Mean and Median
 We will be leveraging the doBy package to simplify our calculations of the mean and median of the trunk circumferences for different sizes of trees
 
 ```r
@@ -141,7 +141,7 @@ summaryBy(circumference~Tree,data = Orange,FUN = list(mean,median))
 
 Here we see that Tree 1 has a circumference mean of 99.57 and circumference median of 115. Tree 2 has a circumference mean of 135.28 and circumference median of 156. Tree 3 has a circumference mean of 94.00 and circumference median of 108. Tree 4 has a circumference mean of 139.29 and circumference median of 167. Tree 5 has a circumference mean of 111.14 and circumference median of 125.
 
-##Step 2: Generate a Scatter Plot 
+## Step 2: Generate a Scatter Plot 
 After calculating the mean and median of the tree circumferences, we will use the ggplot2 package to create a scatter plot of the trunk circumferences against the age of the tree. We chose to plot circumference on the x-axis and age on the y-axis because age is the response variable in this case. Additionally, We will use different plotting symbols to represent each tree. 
 
 ```r
@@ -151,7 +151,7 @@ ggplot(Orange,aes(x=circumference,y=age,color=Tree,shape=Tree))+geom_point()
 
 ![](CaseStudy2_files/figure-html/unnamed-chunk-2-1.png)<!-- -->
 
-##Step 3: Display a Box Plot
+## Step 3: Display a Box Plot
 Lastly, we will display the trunk circumferences on a comparative boxplot against Tree. We will order the boxplots in the increasing order of maximum diameter.(Note: Here we are assuming that the order of the boxplots should be in ascending order according to the tree's maximum diameter) In order to do this, we must create a new column for maximum diameter. To calculate maximum diameter, we divide the tree's circumference by pi. 
 
 ```r
@@ -175,9 +175,9 @@ ggplot(Orange_rank,aes(x=factor(Tree),y=circumference))+geom_boxplot()
 
 ![](CaseStudy2_files/figure-html/unnamed-chunk-3-1.png)<!-- -->
 
-#Question 3 - Temp
+# Question 3 - Temp
 
-##Step 1: Clean up the Temp Data (part i)
+## Step 1: Clean up the Temp Data (part i)
 Before we perform our analysis, we will clean up the TEMP.csv data. We do this by defining YYYY-MM-DD as YMD and MM/DD/YY as MDY because there are 2 sets of dates in the sheet and we can only apply date formatting to 1 format. Next, we extract the years from each set and substitute NA with 0. Then, we combine the two sets based on the year variable and create a subset of that data where years greater than 1900*. Finally, we rename the columns appropriately and remove all NA records.  
 
 *Note: Combining year1 and year2 will give us a single column of the year of the date. However, we see that dates with years greater than 1900 are all formatted the same way. Therefore, this step could have potentially been removed
@@ -232,7 +232,7 @@ names(degree)<-c("Date","MoAvgTemp","MoAvgTemp_Unc","Country","date1","date2","y
 degreeexNA<-subset(degree,MoAvgTemp!="NA")
 ```
 
-##Step 2: Analyze and Visualize Temp Data (part i)
+## Step 2: Analyze and Visualize Temp Data (part i)
 We begin our analysis by creating a dataset with the max and min temperatures for each country. We then combine the max and min temperatures to calculate the differences, and we rank the countries by decreasing order of max temperature difference. Lastly, we create a subset of only the top twenty countries based on maximum difference and plot the data using ggplot2.
 
 ```r
@@ -266,7 +266,7 @@ graphi
 The top 20 countries with the maximum temperature differences for the period since 1900 are (in order) Kazakhstan, Mongolia, Russia, Canada, Uzbekistan, Turkmenistan, Belarus, Finland, Estonia, Ukraine, Kyrgezstan, North Korea, Latvia, Moldova, Greenland, Denmark, Lithuania, Tajikistan, Poland, and Armenia.
 
 
-##Step 3: Analyze and Visualize subset UStemp (part ii)
+## Step 3: Analyze and Visualize subset UStemp (part ii)
 UStemp is a subset of Temp data set that includes temperatures in the US since 1990. With UStemp, we will first create a new column to display the monthly average land temperature in Fahrenheit. Next, we will calculate and plot the average temperature by year. Finally, we will use a for loop to calculate the one year difference of average land temperature by year and provide the maximum difference of the corresponding two years. 
 
 ```r
@@ -355,7 +355,7 @@ max_diff
 
 Here we see that the maximum temperature difference between 2 years since 1990 is 2012-2013 where the temperature difference is 1.86 degree Fahrenheit.
 
-##Step 4: Clean up the CityTemp Data (part iii)
+## Step 4: Clean up the CityTemp Data (part iii)
 Before we perform our analysis, we will clean up the CITYTEMP.csv data. We do this by defining YYYY-MM-DD as YMD and MM/DD/YY as MDY because there are 2 sets of dates in the sheet and we can only apply date formatting to 1 format. Next, we extract the years from each set and substitute NA with 0. Then, we combine the two sets based on the year variable and create a subset of that data where years greater than 1900*. Finally, we rename the columns appropriately and remove all NA records.  
 
 *Note: Combining year1 and year2 will give us a single column of the year of the date. However, we see that dates with years greater than 1900 are all formatted the same way. Therefore, this step could have potentially been removed
@@ -410,7 +410,7 @@ names(CityTemp1900)<-c("Date","MoAvgTemp","MoAvgTemp_Unc","City","Country","Lati
 CityTemp1900exNA<-subset(CityTemp1900,MoAvgTemp!="NA")
 ```
 
-##Step 5: Analyze and Visualize CityTemp Data (part iii)
+## Step 5: Analyze and Visualize CityTemp Data (part iii)
 We begin our analysis by creating a dataset with the max and min temperatures for each major city. We then combine the max and min temperatures to calculate the differences, and we rank the cities by decreasing order of max temperature difference. Lastly, we create a subset of only the top twenty cities based on maximum difference and plot the data using ggplot2.
 
 ```r
@@ -443,7 +443,7 @@ graphii
 
 The top 20 major cities with the maximum temperature differences for the period since 1900 are (in order) Harbin, Changchun, Moscow, Shenyang, Montreal, Kiev, St Petersburg, Toronto, Taiyuan, Peking, Tianjin, Seoul, Mashhad, Dalian, Chicago, Tangshan, New York, Baghdad, Berlin, and Jinan.
 
-##Step 6: Compare Temp plot and CityTemp plot
+## Step 6: Compare Temp plot and CityTemp plot
 From our two plots below, we can see that there are some interesting correlations(or lack thereof). For example, 3 of the top 4 cities are in China(Harbin, Changchun, and Shenyang) but China is not included in the top 20 countries. Looking into the data more closely, we can see that countries and cities near the equator or North/South poles are typically not on the top 20 lists. This is because these locations are generally always hot or always cold with not much variation. Generally speaking, the top 20 lists consist of Cities and Countries that are somewhere in the middle of the equator and North/South poles. 
 
 ```r
@@ -460,13 +460,13 @@ graphii
 
 ![](CaseStudy2_files/figure-html/unnamed-chunk-9-2.png)<!-- -->
 
-#Conclusion
+# Conclusion
 Since this Case Study was based on 2 different projects (Orange and Temp), we will break down the conclusions seperately
 
-##Orange
+## Orange
 In this project, we calculated the circumference mean and median, and generated two plots to show our analysis on R's built-in data set Orange. Our mean/median calculations show that Tree 3 has the smallest circumference mean and median while Tree 4 has the largest. From our scatterplot, we can conclude that trees 2 and 4 are consistently at the larger end of the circumference measurements throughout the tree's lifecycle. Conversely, trees 3 and 1 are on the smaller end. Tree 5 starts out as the smallest tree, but eventually outgrows trees 3 and 1. Lastly, our boxplot(which is ordered by increasing diameter) shows that trees 3 and 1 are generally smaller that trees 2 and 4, no matter which quantile we compare them at. There are also no outliers in any of the 5 trees.
   
-##Temp
+## Temp
 In this project, we analyzed and visualized three data sets: Temp, TempUS, and CityTemp. Before we were able to conduct our analysis, we made sure to clean up our data accordingly so that we can extract the year correctly from the formatted dates. 
 
 From our Temp data analysis, we saw that the top 20 countries with the maximum differences for the period since 1900 are (in order) Kazakhstan, Mongolia, Russia, Canada, Uzbekistan, Turkmenistan, Belarus, Finland, Estonia, Ukraine, Kyrgezstan, North Korea, Latvia, Moldova, Greenland, Denmark, Lithuania, Tajikistan, Poland, and Armenia. 
